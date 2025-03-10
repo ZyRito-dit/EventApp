@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">EventApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="look_event">Look Event</string>
+    <string name="event_date">Event Date</string>
+    <string name="event_title">Event Title</string>
+    <string name="favorite_maintance">favorite Maintance</string>
+    <string name="finshed_maintance">Finshed Maintance</string>
+    <string name="setting_maintance">Setting Maintance</string>
+    <string name="favorite_event">Favorite Event !</string>
+    <string name="rocomendation_event_for_you">Rocomendation Event For You !</string>
+</resources>
