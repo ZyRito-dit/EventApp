@@ -23,6 +23,7 @@ class FavoriteFragment : Fragment() {
         FavoriteViewModelFactory(FavoriteEventRepository(AppDataBase.getDatabase(requireContext()).favoriteEventDao()))
     }
 
+
     private lateinit var adapter: FavoriteEventAdapter
     private lateinit var recyclerView: RecyclerView
 
@@ -43,6 +44,8 @@ class FavoriteFragment : Fragment() {
         adapter = FavoriteEventAdapter(emptyList()) { event ->
             favoriteViewModel.removeFromFavorite(event.id)
         }
+
+
 
         recyclerView.adapter = adapter
 

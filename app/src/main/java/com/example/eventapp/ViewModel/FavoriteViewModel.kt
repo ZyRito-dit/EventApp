@@ -1,14 +1,12 @@
 package com.example.eventapp.ViewModel
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.eventapp.Repository.FavoriteEventRepository
 import com.example.eventapp.favoriteeventdata.FavoriteEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class FavoriteViewModel(private val repository: FavoriteEventRepository) : ViewModel() {

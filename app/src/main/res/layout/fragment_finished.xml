@@ -11,13 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12sp"
-        android:queryHint="Cari Event..." />
+        android:queryHint="Cari Event..."
+        android:text="@string/cari_event_yang_finished"/>
+
+
 
     <TextView
         android:id="@+id/tv_finished_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Finished Event!"
+        android:text="@string/finished_event"
         android:layout_marginTop="24sp"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -27,7 +30,7 @@
         android:id="@+id/tv_finished_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Events that have ended"
+        android:text="@string/events_that_have_ended"
         android:textSize="14sp" />
 
 

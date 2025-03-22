@@ -19,13 +19,13 @@ class FinishedViewModel(private val repository: EventRepository) : ViewModel() {
         getFinishedEvents()
     }
 
-    fun getFinishedEvents() {
+    private fun getFinishedEvents() {
         viewModelScope.launch {
             try {
                 val response = repository.getFinishedEvents()
                 if (response.isSuccessful) {
                     response.body()?.let { data ->
-                        _finishedEvents.value = data.listEvents ?: emptyList()
+                        _finishedEvents.value = data.listEvents
                         Log.d("FinishedViewModel", "Jumlah Event: ${_finishedEvents.value.size}")
                     } ?: Log.e("FinishedViewModel", "Response body null")
                 } else {
@@ -36,6 +36,7 @@ class FinishedViewModel(private val repository: EventRepository) : ViewModel() {
             }
         }
     }
+
 }
 
 

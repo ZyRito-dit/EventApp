@@ -80,6 +80,6 @@ class FinishedFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        searchView = null // 🔥 Hindari memory leak
+        searchView = null
     }
 }

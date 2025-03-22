@@ -17,6 +17,7 @@
             android:id="@+id/img_favorite_event"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:contentDescription="@string/todo"
             android:scaleType="centerCrop"
             android:background="@drawable/waifu" />
 
@@ -26,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Nama Event"
+            android:text="@string/nama_event"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -35,9 +36,8 @@
             android:id="@+id/tv_favorite_event_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tanggal Event"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray" />
+            android:text="@string/tanggal_event"
+            android:textSize="14sp" />
 
 
         <Button
@@ -46,6 +46,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:backgroundTint="#41F4A9"
-            android:text="Remove from Favorite" />
+            android:text="@string/remove_from_favorite" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

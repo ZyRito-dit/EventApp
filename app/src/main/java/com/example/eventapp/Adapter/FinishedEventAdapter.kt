@@ -1,5 +1,4 @@
 package com.example.eventapp.Adapter
-
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -23,35 +22,30 @@ class FinishedEventAdapter(
     private var eventList: List<ListEventsItem>,
     private var favoriteEvents: List<FavoriteEvent>,
     private val favoriteViewModel: FavoriteViewModel
+
+
 ) : RecyclerView.Adapter<FinishedEventAdapter.EventViewHolder>() {
 
-    private var filteredList: List<ListEventsItem> = eventList // 🔥 Daftar hasil pencarian
-
+    private var filteredList: List<ListEventsItem> = eventList
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_event, parent, false)
         return EventViewHolder(view)
     }
-
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-        val event = filteredList[position] // 🔥 Gunakan daftar hasil filter
+        val event = filteredList[position]
         val isFavorite = favoriteEvents.any { it.id == event.id }
         holder.bind(event, isFavorite)
     }
-
-    override fun getItemCount(): Int = filteredList.size // 🔥 Gunakan daftar hasil filter
-
+    override fun getItemCount(): Int = filteredList.size
     fun setEvents(events: List<ListEventsItem>) {
         eventList = events
-        filteredList = events // 🔥 Pastikan daftar filter diperbarui
+        filteredList = events
         notifyDataSetChanged()
     }
-
     fun setFavoriteEvents(favorites: List<FavoriteEvent>) {
         favoriteEvents = favorites
         notifyDataSetChanged()
     }
-
-    // 🔥 Fungsi filter untuk pencarian berdasarkan nama event
     fun filter(query: String) {
         filteredList = if (query.isEmpty()) {
             eventList
@@ -60,7 +54,6 @@ class FinishedEventAdapter(
         }
         notifyDataSetChanged()
     }
-
     inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val eventName: TextView = itemView.findViewById(R.id.tv_event_title)
         private val eventDate: TextView = itemView.findViewById(R.id.tv_event_date)
@@ -68,7 +61,6 @@ class FinishedEventAdapter(
         private val btnLihatEvent: TextView = itemView.findViewById(R.id.btn_lihatevent)
         private val btnDetailEvent: Button = itemView.findViewById(R.id.btn_detailevent)
         private val likeButton: ImageView = itemView.findViewById(R.id.btn_favorite)
-
         fun bind(event: ListEventsItem, isFavorite: Boolean) {
             eventName.text = event.name
             eventDate.text = event.endTime
@@ -77,26 +69,22 @@ class FinishedEventAdapter(
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(event.link))
                 itemView.context.startActivity(intent)
             }
-
             Glide.with(itemView.context)
                 .load(event.mediaCover)
                 .into(eventImage)
-
             likeButton.setImageResource(
                 if (isFavorite) R.drawable.baseline_favorite_24
                 else R.drawable.baseline_favorite_border_24
             )
-
             likeButton.setOnClickListener {
                 val favoriteEvent = event.toFavoriteEvent()
                 favoriteViewModel.toggleFavorite(favoriteEvent)
             }
-
             btnDetailEvent.setOnClickListener {
                 val fragment = DetailEventFragment()
                 val bundle = Bundle()
                 bundle.putInt("event_id", event.id)
-                bundle.putString("event_type", "finished")
+                bundle.putStringArray("event_type", arrayOf("finished", "upcoming"))
                 fragment.arguments = bundle
 
                 val transaction = (itemView.context as AppCompatActivity).supportFragmentManager.beginTransaction()

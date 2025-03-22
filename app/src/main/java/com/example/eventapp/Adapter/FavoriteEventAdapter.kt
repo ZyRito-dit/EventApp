@@ -19,38 +19,33 @@ class FavoriteEventAdapter(
     private var eventList: List<FavoriteEvent>,
     private val onRemoveClick: (FavoriteEvent) -> Unit
 ) : RecyclerView.Adapter<FavoriteEventAdapter.FavoriteEventViewHolder>() {
-
     inner class FavoriteEventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imgEvent: ImageView = itemView.findViewById(R.id.img_favorite_event)
         val tvEventTitle: TextView = itemView.findViewById(R.id.tv_favorite_event_title)
         val tvEventDate: TextView = itemView.findViewById(R.id.tv_favorite_event_date)
         val btnRemove: Button = itemView.findViewById(R.id.btn_remove_favorite)
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteEventViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_favorite, parent, false)
         return FavoriteEventViewHolder(view)
     }
-
     override fun onBindViewHolder(holder: FavoriteEventViewHolder, position: Int) {
         val event = eventList[position]
-
         holder.tvEventTitle.text = event.name
         holder.tvEventDate.text = event.beginTime
 
         Glide.with(holder.itemView.context)
             .load(event.mediaCover)
             .into(holder.imgEvent)
-
         holder.btnRemove.setOnClickListener {
             onRemoveClick(event)
+
         }
-
-
         holder.itemView.setOnClickListener {
             val fragment = DetailEventFragment()
             val bundle = Bundle()
             bundle.putInt("event_id", event.id)
+            bundle.putStringArray("event_type", arrayOf("finished", "upcoming"))
             fragment.arguments = bundle
 
             val activity = holder.itemView.context as AppCompatActivity
@@ -65,6 +60,5 @@ class FavoriteEventAdapter(
 
     fun setEvents(events: List<FavoriteEvent>) {
         eventList = events
-        notifyDataSetChanged()
     }
 }

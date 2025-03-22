@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.eventapp.ViewModel.SettingViewModel
 import com.example.eventapp.ViewModelFactory.SettingViewModelFactory
 import com.example.eventapp.datastore.SettingPreferences
+import com.example.eventapp.fragment.DetailEventFragment
 import com.example.eventapp.fragment.FavoriteFragment
 import com.example.eventapp.fragment.FinishedFragment
 import com.example.eventapp.fragment.SettingFragment
@@ -23,7 +24,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         settingViewModel.themeSetting.observe(this) { isDarkModeActive ->
             AppCompatDelegate.setDefaultNightMode(
                 if (isDarkModeActive) AppCompatDelegate.MODE_NIGHT_YES
@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
 
         bottomNavigation.setOnItemSelectedListener { menuItem ->
             val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
@@ -52,11 +51,24 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        if (intent.hasExtra("event_id")) {
+            val eventId = intent.getIntExtra("event_id", -1)
+            val eventType = intent.getStringArrayExtra("event_type") ?: arrayOf("upcoming")
 
-        if (savedInstanceState == null) {
+            if (eventId != -1) {
+                val detailFragment = DetailEventFragment().apply {
+                    arguments = Bundle().apply {
+                        putInt("event_id", eventId)
+                        putStringArray("event_type", eventType)
+                    }
+                }
+                loadFragment(detailFragment)
+            }
+        } else if (savedInstanceState == null) {
             loadFragment(Upcoming())
         }
     }
+
 
 
     private fun loadFragment(fragment: Fragment) {
@@ -67,11 +79,5 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount > 0) {
-            supportFragmentManager.popBackStack()
-        } else {
-            super.onBackPressed()
-        }
-    }
+
 }

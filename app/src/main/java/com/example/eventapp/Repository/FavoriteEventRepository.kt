@@ -16,7 +16,4 @@ class FavoriteEventRepository(private val favoriteEventDao: FavoriteEventDao) {
         favoriteEventDao.deleteFavorite(eventId)
     }
 
-    fun isFavorite(eventId: Int): Flow<Boolean> {
-        return favoriteEventDao.isFavorite(eventId)
-    }
 }

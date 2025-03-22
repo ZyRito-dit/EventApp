@@ -18,6 +18,7 @@
             android:id="@+id/img_event"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:contentDescription="@string/todo"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
             android:src="@drawable/waifu" />
@@ -28,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Nama Event"
+            android:text="@string/nama_event"
 
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -37,35 +38,37 @@
             android:id="@+id/tv_event_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tanggal Event"
+            android:text="@string/tanggal_event"
             android:textSize="14sp"/>
 
 
 <LinearLayout
+    style="?android:attr/buttonBarStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginTop="16dp">
 
 
-
     <Button
         android:id="@+id/btn_detailevent"
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-
-        android:text="Lihat Detail Events"
-        />
+        android:backgroundTint="#41F4A9"
+        android:text="@string/lihat_detail_events" />
 
 
     <Button
         android:id="@+id/btn_lihatevent"
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginLeft="12sp"
-        android:text="Join Event"
+        android:layout_marginStart="12sp"
+        android:backgroundTint="#41F4A9"
+        android:text="@string/join_event"
         />
 
 
@@ -80,8 +83,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/baseline_favorite_border_24"
-            android:tint="@color/black"
-            android:contentDescription="Favorite Button"/>
+            android:contentDescription="@string/favorite_button"
+            app:tint="@color/black" />
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
